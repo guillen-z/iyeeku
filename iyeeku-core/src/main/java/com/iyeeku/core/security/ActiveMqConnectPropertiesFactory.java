@@ -6,18 +6,19 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
-public class C3P0DatasourcePropertiesFactory {
+public class ActiveMqConnectPropertiesFactory {
 
     private static final String PRODUCTION_MODE = "0";
-    private static final String PROP_USERNAME = "user";
+    private static final String PROP_USERNAME = "userName";
     private static final String PROP_PASSWORD = "password";
-    private final static Logger logger = LoggerFactory.getLogger(C3P0DatasourcePropertiesFactory.class);
+    private final static Logger logger = LoggerFactory.getLogger(ActiveMqConnectPropertiesFactory.class);
 
     public static Properties getProperties(String user , String pwd , String production) throws Exception{
 
         Properties p = new Properties();
 
         if(PRODUCTION_MODE.equals(production)){
+
             try{
                 String ukey = System.getProperty("ukey");
                 String key = System.getProperty("key");
@@ -33,8 +34,9 @@ public class C3P0DatasourcePropertiesFactory {
         }else{
             p.setProperty(PROP_PASSWORD , pwd);
         }
-
         return p;
     }
+
+
 
 }

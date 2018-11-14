@@ -28,8 +28,8 @@
 				<!-- <value>classpath:config/env/jdbc.properties</value> -->
                 <!--<value>config/env/iyeeku_env.properties</value>-->
                 <!--<value>config.env.iyeeku_env.properties</value>-->
-				<value>classpath:config/env/iyeeku_env_local.properties</value>
-				<!--<value>classpath:config/env/iyeeku_env.properties</value>-->
+				<!--<value>classpath:config/env/iyeeku_env_local.properties</value>-->
+				<value>classpath:config/env/iyeeku_env.properties</value>
 			</list>
 		</property>
 		<property name="fileEncoding">

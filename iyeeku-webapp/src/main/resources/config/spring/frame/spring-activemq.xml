@@ -13,9 +13,9 @@
     <!-- 配置JSM连接工厂 -->
     <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="${broker.URL}" />
-        <property name="userName" value="${mq.username}"/>
         <property name="properties">
-            <bean class="com.iyeeku.core.security.C3P0DatasourcePropertiesFactory" factory-method="getProperties">
+            <bean class="com.iyeeku.core.security.ActiveMqConnectPropertiesFactory" factory-method="getProperties">
+                <constructor-arg type="java.lang.String" value="${mq.username}"/>
                 <constructor-arg type="java.lang.String" value="${mq.passwd}"/>
                 <constructor-arg type="java.lang.String" value="${run_mode}"/>
             </bean>

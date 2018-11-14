@@ -53,17 +53,17 @@ public class SecurityUtil {
     }
 
     public static void main(String[] args) throws Exception {
-/*        String message = "123456";
-        String key = "123456";
+        String message = "admin";
+        String key = "11337612A9FE65763B22CDD09441FA04";
         String encryptMsg = encrypt(message, key);
         System.out.println("encrypted message is below :");
-        System.out.println(encryptMsg);*/
+        System.out.println(encryptMsg);
 
-/*      String decryptedMsg = decrypt(encryptMsg, key);
+        String decryptedMsg = decrypt(encryptMsg, key);
         System.out.println("decrypted message is below :");
         System.out.println(decryptedMsg);
 
-        System.out.println(encrypt("123456" , ""));*/
+        System.out.println(encrypt("123456" , ""));
 
     }
 
