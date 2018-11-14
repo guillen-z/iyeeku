@@ -30,8 +30,8 @@
             </div>
 
             <div id="datagrid1" dataField="data" class="mini-datagrid" style="width:100%;height: 90%;" borderStyle="border-left:0;border-bottom:0;border-right:0;"
-                 url="${pageContext.request.contextPath}/roleRelationPer/listSSmkUrl" multiSelect="true"
-                 ondrawcell="onDrawCell" onselectionchanged="" showPager="false"
+                 url="${pageContext.request.contextPath}/roleRelationPer/listSSmkUrl"   multiSelect="true"
+                 allowCellSelect="false" showPager="false" ondrawcell="onDrawCell" onselectionchanged="onSelectionChanged"
             >
                 <div property="columns">
                     <div type="checkcolumn" name="select"></div>
@@ -46,7 +46,7 @@
     <div class="mini-toolbar" style="text-align:center;padding-top:8px;padding-bottom:8px;" borderStyle="border-left:0;border-bottom:0;border-right:0;">
         <a class="mini-button" iconCls="icon-cancel" onclick="onCancel()">取消</a>
         <span style="display:inline-block;width:25px;"></span>
-        <a class="mini-button" iconCls="icon-ok" id="btnOk" onclick="onOk()" enabled="false">确定</a>
+        <a class="mini-button" iconCls="icon-ok" id="btnOk" onclick="onOk()">确定</a>
     </div>
 
 </body>
@@ -61,8 +61,10 @@
         var jsbh = data.jsbh;
         var cdurl = data.cdurl;
         var cdbh = data.cdbh;
+        //findRoleUrl(cdbh , jsbh , cdurl);
         grid.load({cdbh:cdbh , jsbh:jsbh , gnssmk:cdurl});
         findRoleUrl(cdbh , jsbh , cdurl);
+
     }
 
     function findRoleUrl(cdbh,jsbh,cdurl) {
@@ -79,18 +81,45 @@
         });
     }
 
-    var index = 1;
-    
+    var index = 0;
+
     function onDrawCell(e) {
+        // TODO 这里有个奇怪的BUG，为啥不反显
         var row = e.row;
-        if ((yxzMap.containsKey(row.urlbh))){
+        if (yxzMap.containsKey(row.urlbh)){
             grid.setSelected(row);
         }
     }
+    
+    function onSelectionChanged(e) {
+        var grid2 = e.sender;
+        var isChange = grid2.getSelecteds();   //获取选中行
+        var sel = e.select;     //是否选中
+        if (sel){
+            for (var i = 0 , l = isChange.length ; i < l ; i++){
+                yxzMap.put(isChange[i].urlbh , isChange[i].urlbh);
+            }
+        }else {
+            for (var i = 0 , l = e.records.length ; i < l ; i++){
+                yxzMap.put(e.records[i].urlbh);
+            }
+        }
+    }
+    
+    function onOk() {
+        console.info(index);
+        var rows = grid.getSelecteds();
+        var sqzylx = "LJ";
+        var urlbhs = [];  //存放urlbh
+        for (var i = 0 , l = yxzMap.size() ; i < l ; i++){
+            urlbhs.push(yxzMap.values()[i]);
+        }
+        var sqzybm = urlbhs.join(",");
 
+
+    }
 
 
 </script>
-
 
 </html>

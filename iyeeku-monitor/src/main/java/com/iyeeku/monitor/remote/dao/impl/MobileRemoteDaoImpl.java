@@ -16,9 +16,9 @@ public class MobileRemoteDaoImpl extends BaseDaoImpl implements IMobileRemoteDao
     private Logger logger = LoggerFactory.getLogger(MobileRemoteDaoImpl.class);
 
     @Override
-    public List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId) {
+    public List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId , int offSet , int pageSize) {
         this.logger.info("MobileRemoteDaoImpl findMonitoredMachineListByDeviceId");
-        return this.queryAll_myBatis("com.iyeeku.monitor.remote.dao.IMobileRemoteDao.findMonitoredMachineListByDeviceId",deviceId);
+        return this.queryAll_myBatis("com.iyeeku.monitor.remote.dao.IMobileRemoteDao.findMonitoredMachineListByDeviceId",deviceId , offSet , pageSize);
     }
 
     @Override

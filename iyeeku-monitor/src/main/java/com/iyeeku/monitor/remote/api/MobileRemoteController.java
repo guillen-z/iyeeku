@@ -19,13 +19,14 @@ import java.util.Map;
 public class MobileRemoteController {
 
     private Logger logger = LoggerFactory.getLogger(MobileRemoteController.class);
+    private static final int PAGESIZE = 10;
 
     @Autowired
     private IMobileRemoteService iMobileRemoteService;
     @Autowired
     private SendMessage sendMessage;
 
-    @RequestMapping(value = "getMonitoredMachineList" , method = {RequestMethod.POST , RequestMethod.GET} , name = "获取被监控机器列表信息")
+    @RequestMapping(value = "getMonitoredMachineList" , method = RequestMethod.POST , name = "获取被监控机器列表信息")
     @ResponseBody
     public ResponseMsg getMonitoredMachineList(@RequestBody(required = false) Map<String , Object> param){
         ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
@@ -34,7 +35,8 @@ public class MobileRemoteController {
         }else{
             String deviceId = String.valueOf(param.get("deviceId"));
             this.logger.info("查询参数：设备ID：{} ==>> " + deviceId);
-            List<Map<String,Object>> list = this.iMobileRemoteService.findMonitoredMachineListByDeviceId(deviceId);
+            int pageIndex = Integer.valueOf(String.valueOf(param.get("qqys") == null ? "0" : param.get("qqys")));
+            List<Map<String,Object>> list = this.iMobileRemoteService.findMonitoredMachineListByDeviceId(deviceId , pageIndex , PAGESIZE);
             respMsg.formatSuccMsg();
             Map<String,Object> rtnMap = new HashMap<>();
             rtnMap.put("list" , list);
@@ -43,7 +45,7 @@ public class MobileRemoteController {
         }
     }
 
-    @RequestMapping(value = "getMonitoredMachineInfo" , method = {RequestMethod.POST , RequestMethod.GET} , name = "获取被监控的机器信息")
+    @RequestMapping(value = "getMonitoredMachineInfo" , method = RequestMethod.POST , name = "获取被监控的机器信息")
     @ResponseBody
     public ResponseMsg getMonitoredMachineInfo(@RequestBody(required = false) Map<String , Object> param){
         ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
@@ -61,7 +63,7 @@ public class MobileRemoteController {
         }
     }
 
-    @RequestMapping(value = "sendTaskToMachine" , method = {RequestMethod.POST , RequestMethod.GET} , name = "发送命令给机器")
+    @RequestMapping(value = "sendTaskToMachine" , method = RequestMethod.POST , name = "发送命令给机器")
     @ResponseBody
     public ResponseMsg sendTaskToMachine(@RequestBody(required = false) Map<String , Object> param){
         ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
@@ -72,7 +74,7 @@ public class MobileRemoteController {
         }
     }
 
-    @RequestMapping(value = "sendStatusToMachine" , method = {RequestMethod.POST , RequestMethod.GET} , name = "修改电脑状态，用于调试")
+    @RequestMapping(value = "sendStatusToMachine" , method = RequestMethod.POST , name = "修改电脑状态，用于调试")
     @ResponseBody
     public ResponseMsg sendStatusToMachine(@RequestBody(required = false) Map<String , Object> param){
         ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
@@ -99,8 +101,6 @@ public class MobileRemoteController {
 
 
 
-
-
     @RequestMapping(value = "debugTakeMsgFromQueue",method = {RequestMethod.POST , RequestMethod.GET} , name = "修改电脑状态，用于调试")
     @ResponseBody
     public void debugTakeMsgFromQueue(@RequestParam int count){
@@ -114,7 +114,6 @@ public class MobileRemoteController {
         }catch (InterruptedException ex){
 
         }
-
     }
 
     private ResponseMsg generateRespMsgAndCheckReqParam(Map<String,Object> param){

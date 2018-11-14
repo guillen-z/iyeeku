@@ -153,7 +153,7 @@
 
     //连接成功建立的回调方法
     websocket.onopen = function (ev) {
-        websocket.send("Listener");
+        //websocket.send("Listener");
     }
 
     //接收到消息的回调方法
@@ -169,7 +169,7 @@
     }
 
     function send() {
-        var message = "\nhello iyeeku websocket....\n";
+        var message = "{\"deviceId\":\"DSX1345\"}";
         websocket.send(message);
     }
 

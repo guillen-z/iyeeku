@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface IMobileRemoteDao {
 
-    public abstract List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId);
+    public abstract List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId , int offSet , int pageSize);
 
     public abstract Map<String, Object> findMonitoredMachineInfoByMap(Map<String,String> map);
 

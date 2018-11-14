@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -57,21 +58,37 @@ public class NotificationThread extends Thread {
             }*/
 
             while (true){
+
+                String text;
+
+                //从队列中拿到消息
                 String status = MachineStatusQueue.queue.take();
+
+                try {
+                    //针对可能出现的数据库查询异常，不再进行消息通知
+                    text = NotificationMsgUtil.getNotiMsgToRemoteClient(status);
+                }catch (Exception ex){
+                    logger.error("获取消息失败!! , 不再发送通知...");
+                    ex.printStackTrace();
+                    continue;
+                }
 
                 logger.debug("\n开始通知时 : WebSocketSession个数 ：" + sessions.size());
 
                 if (sessions != null){
+
                     Iterator<WebSocketSession> it = sessions.iterator();
                     while (it.hasNext()){
                         WebSocketSession currentSession = it.next();
 
                         if (currentSession != null && currentSession.isOpen()){
 
-                            String text = NotificationMsgUtil.getNotiMsgToRemoteClient(status);
-                            // 给当前session发送信息
-                            currentSession.sendMessage(new TextMessage(text));
-
+                            try {
+                                // 给当前session发送信息
+                                currentSession.sendMessage(new TextMessage(text));
+                            }catch (IOException se){
+                                logger.error("消息发送失败...");
+                            }
                         }else {
                             logger.error("\n当前WebSocketSession会话已经失效!!\n");
                             sessions.remove(currentSession); //移除这个session

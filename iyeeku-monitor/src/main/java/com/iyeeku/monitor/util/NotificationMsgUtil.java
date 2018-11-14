@@ -1,7 +1,7 @@
 package com.iyeeku.monitor.util;
 
 import com.iyeeku.core.util.JsonUtil;
-import com.iyeeku.monitor.remote.service.NotificationMsgService;
+import com.iyeeku.monitor.remote.service.INotificationMsgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +13,27 @@ import java.util.Map;
 public class NotificationMsgUtil {
 
     private static Logger logger = LoggerFactory.getLogger(NotificationMsgUtil.class);
-    private static NotificationMsgService notificationMsgService;
+    private static INotificationMsgService iNotificationMsgService;
 
     /**
      * spring 静态属性注入 ， 注意 setter 方法上的 static 不能加
-     * @param notificationMsgService
+     * @param iNotificationMsgService
      */
     @Autowired
-    public void setNotificationMsgService(NotificationMsgService notificationMsgService) {
-        NotificationMsgUtil.notificationMsgService = notificationMsgService;
+    public void setiNotificationMsgService(INotificationMsgService iNotificationMsgService) {
+        NotificationMsgUtil.iNotificationMsgService = iNotificationMsgService;
     }
 
     public static String getNotiMsgToRemoteClient(String zj){
-        System.out.println("111");
-        System.out.println(notificationMsgService);
 
-        Map<String,String> notiMsgMap = notificationMsgService.getNotificationMsgResultMapByZJ(zj);
+        Map<String,String> notiMsgMap = iNotificationMsgService.getNotificationMsgResultMapByZJ(zj);
 
-        String msg = JsonUtil.bean2Json(notiMsgMap);
+        MessageVO msgVO = new MessageVO(MessageCodeConstant.CODE_002);
 
-        return msg;
+        msgVO.setMsgText(notiMsgMap);
+
+        return JsonUtil.bean2Json(msgVO);
 
     }
-
 
 }

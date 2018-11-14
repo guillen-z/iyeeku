@@ -1,5 +1,3 @@
-import com.iyeeku.core.util.UUIDGenerator;
-
 public class TestMain {
 
     public static void main(String[] args){
@@ -23,8 +21,19 @@ public class TestMain {
 /*        String url = "/index";
         System.out.println(url.indexOf("/",1));*/
 
-       for (int i=0 ; i < 11 ; i++)
-        System.out.println(UUIDGenerator.generate(""));
+/*       for (int i=0 ; i < 11 ; i++)
+        System.out.println(UUIDGenerator.generate(""));*/
+
+/*        List<String> list = new ArrayList<>();
+        list.add("aaa");
+        list.add("bbb");
+
+        list.forEach( n -> System.out.println(n));
+        list.forEach(System.out::println);*/
+
+        String a = String.valueOf(null);
+        int i = Integer.valueOf(null);
+        System.out.println(i);
 
     }
 

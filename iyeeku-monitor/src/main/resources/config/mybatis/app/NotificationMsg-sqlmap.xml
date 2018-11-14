@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iyeeku.monitor.remote.dao.NotificationMsgDao">
+<mapper namespace="com.iyeeku.monitor.remote.dao.INotificationMsgDao">
 
-    <select id="getNotificationMsgResultMapByZJ" parameterType="java.lang.String" resultType="java.util.HashMap">
+    <resultMap id="baseResultMap111" type="java.util.HashMap">
+        <result property="jqbh" column="JQBH"/>
+        <result property="dnmc" column="DNMC"/>
+        <result property="dnnc" column="DNNC"/>
+        <result property="deviceId" column="SBBH"/>
+        <result property="zt" column="ZT"/>
+    </resultMap>
+
+    <select id="getNotificationMsgResultMapByZJ" parameterType="java.lang.String" resultMap="baseResultMap111">
       SELECT a.JQBH,a.DNMC,b.SBBH,b.SQJQNC as DNNC,a.ZT from IYEEKU_MACHINE_INFO a
       LEFT JOIN IYEEKU_MACHINE_ACCESS_MONITOR b ON a.ZJ = b.SQJQBH
       WHERE a.ZJ = #{VALUE} AND b.SFYXJK = '1'

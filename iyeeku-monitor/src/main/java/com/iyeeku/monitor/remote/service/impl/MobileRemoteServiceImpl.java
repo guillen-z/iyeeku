@@ -20,8 +20,8 @@ public class MobileRemoteServiceImpl implements IMobileRemoteService {
     private IMobileRemoteDao iMobileRemoteDao;
 
     @Override
-    public List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId) {
-        return this.iMobileRemoteDao.findMonitoredMachineListByDeviceId(deviceId);
+    public List<Map<String, Object>> findMonitoredMachineListByDeviceId(String deviceId , int pageIndex , int pageSize) {
+        return this.iMobileRemoteDao.findMonitoredMachineListByDeviceId(deviceId , pageIndex * pageSize , pageSize );
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface IMobileRemoteService {
 
-    public abstract List<Map<String,Object>> findMonitoredMachineListByDeviceId(String deviceId);
+    public abstract List<Map<String,Object>> findMonitoredMachineListByDeviceId(String deviceId , int pageIndex , int pageSize);
 
     public abstract Map<String,Object> findMonitoredMachineInfoByZj(String zj,String deviceId);
 

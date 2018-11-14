@@ -15,6 +15,6 @@ public class MachineInfoServiceImpl implements IMachineInfoService {
     @Autowired
     private IMachineInfoDao iMachineInfoDao;
 
-
+    
 
 }

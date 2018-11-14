@@ -2,14 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iyeeku.monitor.remote.dao.IMobileRemoteDao">
 
-    <select id="findMonitoredMachineListByDeviceId" parameterType="java.lang.String" resultType="java.util.HashMap">
-        select a.zj,a.jqbh,a.macdz,a.dnmc,a.czxt,a.jbpz,a.ip,a.zt,a.lb from IYEEKU_MACHINE_INFO a
+    <resultMap id="baseResultMap1" type="java.util.HashMap">
+        <result property="zj" column="ZJ"/>
+        <result property="jqbh" column="JQBH"/>
+        <result property="dnmc" column="DNMC"/>
+        <result property="dnnc" column="DNNC"/>
+        <result property="jbpz" column="JBPZ"/>
+        <result property="lb" column="LB"/>
+        <result property="ip" column="IP"/>
+        <result property="zt" column="ZT"/>
+        <result property="czxt" column="CZXT"/>
+        <result property="mac" column="MACDZ"/>
+        <result property="row" column="ROWNUM_"/>
+    </resultMap>
+
+    <select id="findMonitoredMachineListByDeviceId" parameterType="java.lang.String" resultMap="baseResultMap1">
+        select a.zj,a.jqbh,a.macdz,a.dnmc,b.sqjqnc as dnnc,a.czxt,a.jbpz,a.ip,a.zt,a.lb from IYEEKU_MACHINE_INFO a
         left join IYEEKU_MACHINE_ACCESS_MONITOR b on a.zj = b.sqjqbh
-        where b.sbbh = #{VALUE}  and b.sfyxjk = '1'
+        where b.sbbh = #{VALUE}  and b.sfyxjk = '1' order by a.zt desc
     </select>
 
-    <select id="findMonitoredMachineInfoByMap" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-      select a.zj,a.jqbh,a.macdz,a.dnmc,a.czxt,a.jbpz,a.ip,a.zt,a.lb from IYEEKU_MACHINE_INFO a
+    <resultMap id="baseResultMap22" type="java.util.HashMap">
+        <result property="zj" column="ZJ"/>
+        <result property="jqbh" column="JQBH"/>
+        <result property="dnmc" column="DNMC"/>
+        <result property="dnnc" column="DNNC"/>
+        <result property="jbpz" column="JBPZ"/>
+        <result property="lb" column="LB"/>
+        <result property="ip" column="IP"/>
+        <result property="zt" column="ZT"/>
+        <result property="czxt" column="CZXT"/>
+        <result property="mac" column="MACDZ"/>
+    </resultMap>
+
+    <select id="findMonitoredMachineInfoByMap" parameterType="java.util.HashMap" resultMap="baseResultMap22">
+      select a.zj,a.jqbh,a.macdz,a.dnmc,b.SQJQNC as dnnc,a.czxt,a.jbpz,a.ip,a.zt,a.lb from IYEEKU_MACHINE_INFO a
       left join IYEEKU_MACHINE_ACCESS_MONITOR b on a.zj = b.sqjqbh
       where a.zj = #{zj} and b.sbbh = #{sbbh} and b.sfyxjk = '1'
     </select>

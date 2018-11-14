@@ -1,6 +1,9 @@
 package com.iyeeku.monitor.websocket;
 
+import com.iyeeku.core.util.JsonUtil;
 import com.iyeeku.core.websocket.IyeekuWebSocketHandler;
+import com.iyeeku.monitor.util.MessageCodeConstant;
+import com.iyeeku.monitor.util.MessageVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
@@ -8,6 +11,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class RemoteMsgNotificationHandler implements IyeekuWebSocketHandler {
@@ -32,9 +37,7 @@ public class RemoteMsgNotificationHandler implements IyeekuWebSocketHandler {
     private static final NotificationThread thread = new NotificationThread(sessions);
 
     static {
-
         thread.start();
-
     }
 
     /**
@@ -46,6 +49,13 @@ public class RemoteMsgNotificationHandler implements IyeekuWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.debug("\n链接成功... , 将连接存储集合中...\n");
         sessions.add(session);
+
+        MessageVO vo = new MessageVO();
+        vo.setMsgCode(MessageCodeConstant.CODE_000);
+        vo.setMsgText(MessageCodeConstant.TEXT_000);
+        String msgText = JsonUtil.bean2Json(vo);
+        session.sendMessage(new TextMessage(msgText));
+
         logger.debug("建立连接后：WebSocketSession个数 ：" + sessions.size());
         //初次连接成功后，开启一个通知线程，阻塞监听队列中是否有值变化，如果有，则进行消息推送
         //NotificationThread thread = new NotificationThread(session);
@@ -56,7 +66,26 @@ public class RemoteMsgNotificationHandler implements IyeekuWebSocketHandler {
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
         String recvMsg = (String) message.getPayload();
         logger.info("收到的消息==>> " + recvMsg );
-        session.sendMessage(new TextMessage("handleMessage！！！！"));
+
+        MessageVO msgVO;
+        Map<String,String> param =  JsonUtil.json2Bean(recvMsg , HashMap.class);
+        if (param == null){
+            msgVO = new MessageVO(MessageCodeConstant.CODE_ERR);
+            msgVO.setMsgText("参数不正确！");
+        }else{
+            String reqCode = param.get("reqCode");
+            if ("001".equals(reqCode)){  //心跳测试
+                msgVO = new MessageVO(MessageCodeConstant.CODE_001);
+                msgVO.setMsgText(MessageCodeConstant.TEXT_001);
+            }else{
+                msgVO = new MessageVO(MessageCodeConstant.CODE_999);
+                msgVO.setMsgText(MessageCodeConstant.TEXT_999);
+            }
+        }
+
+        String msgText = JsonUtil.bean2Json(msgVO);
+        session.sendMessage(new TextMessage(msgText));
+
     }
 
     @Override
@@ -84,5 +113,6 @@ public class RemoteMsgNotificationHandler implements IyeekuWebSocketHandler {
     public boolean supportsPartialMessages() {
         return false;
     }
+
 
 }
