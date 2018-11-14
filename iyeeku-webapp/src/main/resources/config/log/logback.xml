@@ -86,8 +86,13 @@
     <logger name="com.mchange.v2.resourcepool" level="ERROR"/>
     <logger name="org.apache.activemq.transport" level="ERROR"/>
 
+    <logger name="com.iyeeku.monitor.remote.api" additivity="true">
+        <level value="INFO"/>
+        <appender-ref ref="DAYFILE"/>
+    </logger>
 
-    <root level="DEBUG">
+
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
 <!--        <appender-ref ref="DAYFILE"/>
         <appender-ref ref="FILE"/>-->

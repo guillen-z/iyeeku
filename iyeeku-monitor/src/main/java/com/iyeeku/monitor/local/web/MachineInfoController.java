@@ -31,9 +31,14 @@ public class MachineInfoController {
     @RequestMapping(value = "query" , method = RequestMethod.POST , name = "监控电脑列表查询")
     @ResponseBody
     public Map<String,Object> query(MachineInfoVO vo,Pagination pagination) {
-        return null;
+        return this.iMachineInfoService.findAllMachineInfos(vo,pagination);
     }
 
+    @RequestMapping(value = "modifyAccessAuth" , method = RequestMethod.POST , name = "修改设备对机器的操作权限")
+    @ResponseBody
+    public void modifyAccessAuth() {
+
+    }
 
 
 

@@ -24,13 +24,13 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="properties">
 			<bean class="com.iyeeku.core.security.C3P0DatasourcePropertiesFactory" factory-method="getProperties">
+				<constructor-arg type="java.lang.String" value="${username}"/>
 				<constructor-arg type="java.lang.String" value="${passwd}"/>
 				<constructor-arg type="java.lang.String" value="${run_mode}"/>
 			</bean>
 		</property>
 		<property name="driverClass" value="${driverClass}"/>
 		<property name="jdbcUrl" value="${url}"/>
-		<property name="user" value="${username}"/>
 		<property name="initialPoolSize" value="10"></property>
 		<property name="minPoolSize" value="10"></property>
 		<property name="maxPoolSize" value="30"></property>

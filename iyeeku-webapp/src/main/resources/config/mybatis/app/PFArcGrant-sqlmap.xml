@@ -28,6 +28,25 @@
         AND SQZYLX = #{sqzylx,jdbcType=CHAR} AND JLZT = '0'
     </update>
 
+    <update id="updateGrant2" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
+        UPDATE PF_ARCGRANT SET JLZT = '1' WHERE
+        SQDXBH = #{sqdxbh,jdbcType=VARCHAR}
+        AND SQZYLX = #{sqzylx,jdbcType=CHAR}
+        AND JLZT = '0'
+        <if test="sqzybm != null and sqzybm != ''">
+            AND SQZYBM = #{sqzybm,jdbcType=VARCHAR}
+        </if>
+    </update>
+
+    <update id="updateUrlGrantBySqdxbh" parameterType="java.util.HashMap">
+        update PF_ARCGRANT SET JLZT = '0' WHERE SQDXBH = #{sqdxbh}
+          AND SQZYBM IN (
+            SELECT urlbh from PF_RESURL WHERE URLLJ LIKE #{gnssmk}
+            UNION ALL
+            SELECT CDXBM AS URLBH FROM PF_RESRELATION
+            WHERE ZDXBM = #{cdbh} AND ZDXLX = 'CD' AND CDXLX = 'LJ')
+    </update>
+
 <!--    <insert id="saveGrant" parameterType="com.iyeeku.ext.grant.vo.PFArcGrantVO">
       insert into PF_ARCGRANT (SQBZJ, SQDXBH, SQZYBM, SQZYLX, QXYXDTDBH, QXSXSJ,
       QXGQSJ, CJR, CJSJ, ZHXGR, ZHXGSJ, JLZT)

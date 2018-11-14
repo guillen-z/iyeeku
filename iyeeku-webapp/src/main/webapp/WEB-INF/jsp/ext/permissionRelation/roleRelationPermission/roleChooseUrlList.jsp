@@ -54,13 +54,16 @@
     mini.parse();
 
     var yxzMap = new Map();
+    var jsbh = mini.get("jsbh").getValue();
+    var cdurl = mini.get("cdurl").getValue();
+    var cdbh = mini.get("cdbh").getValue();
     var grid = mini.get("datagrid1");
 
     function SetData(data) {
         data = mini.clone(data);
-        var jsbh = data.jsbh;
-        var cdurl = data.cdurl;
-        var cdbh = data.cdbh;
+        jsbh = data.jsbh;
+        cdurl = data.cdurl;
+        cdbh = data.cdbh;
         //findRoleUrl(cdbh , jsbh , cdurl);
         grid.load({cdbh:cdbh , jsbh:jsbh , gnssmk:cdurl});
         findRoleUrl(cdbh , jsbh , cdurl);
@@ -107,7 +110,6 @@
     }
     
     function onOk() {
-        console.info(index);
         var rows = grid.getSelecteds();
         var sqzylx = "LJ";
         var urlbhs = [];  //存放urlbh
@@ -116,6 +118,14 @@
         }
         var sqzybm = urlbhs.join(",");
 
+        var urlStr = "/commonPer/addUrlGrant";
+        $.ajax({
+            url: urlStr,
+            data : {jsbh:jsbh,sqzybm:sqzybm,sqzylx:sqzylx,cdurl:cdurl,cdbh:cdbh},
+            success: function (text) {
+                CloseWindow("ok");
+            }
+        });
 
     }
 

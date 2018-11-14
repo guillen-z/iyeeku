@@ -255,7 +255,7 @@
                     },
                     ondestroy: function (action) {
                         if( action == "ok") {
-
+                            showTips("角色授权URL成功","success");
                         }
                     }
                 });

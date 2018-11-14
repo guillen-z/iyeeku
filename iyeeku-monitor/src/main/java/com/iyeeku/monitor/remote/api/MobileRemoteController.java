@@ -1,6 +1,7 @@
 package com.iyeeku.monitor.remote.api;
 
 import com.iyeeku.core.mq.sender.SendMessage;
+import com.iyeeku.core.util.JsonUtil;
 import com.iyeeku.monitor.remote.service.IMobileRemoteService;
 import com.iyeeku.monitor.remote.vo.ResponseMsg;
 import com.iyeeku.monitor.util.MachineStatusQueue;
@@ -29,49 +30,58 @@ public class MobileRemoteController {
     @RequestMapping(value = "getMonitoredMachineList" , method = RequestMethod.POST , name = "获取被监控机器列表信息")
     @ResponseBody
     public ResponseMsg getMonitoredMachineList(@RequestBody(required = false) Map<String , Object> param){
+
+        this.logger.info("接口getMonitoredMachineList接收参数:{}" , JsonUtil.bean2Json(param));
+
         ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
-        if ("1".equals(respMsg.getCode())){ //参数不合法
-            return respMsg;
-        }else{
+        if ( !"1".equals(respMsg.getCode()) ){ //参数合法
             String deviceId = String.valueOf(param.get("deviceId"));
-            this.logger.info("查询参数：设备ID：{} ==>> " + deviceId);
             int pageIndex = Integer.valueOf(String.valueOf(param.get("qqys") == null ? "0" : param.get("qqys")));
             List<Map<String,Object>> list = this.iMobileRemoteService.findMonitoredMachineListByDeviceId(deviceId , pageIndex , PAGESIZE);
             respMsg.formatSuccMsg();
             Map<String,Object> rtnMap = new HashMap<>();
             rtnMap.put("list" , list);
             respMsg.setData(rtnMap);
-            return respMsg;
         }
+
+        this.logger.info("接口getMonitoredMachineList响应结果:{}" , JsonUtil.bean2Json(respMsg));
+        return respMsg;
     }
 
     @RequestMapping(value = "getMonitoredMachineInfo" , method = RequestMethod.POST , name = "获取被监控的机器信息")
     @ResponseBody
     public ResponseMsg getMonitoredMachineInfo(@RequestBody(required = false) Map<String , Object> param){
+
+        this.logger.info("接口getMonitoredMachineInfo接收参数:{}" , JsonUtil.bean2Json(param));
+
         ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
-        if ("1".equals(respMsg.getCode())){ //参数不合法
-            return respMsg;
-        }else{
+        if ( !"1".equals(respMsg.getCode()) ){ //参数合法
             String deviceId = String.valueOf(param.get("deviceId"));
             String zj = String.valueOf(param.get("zj"));
 
             Map<String,Object> dataMap = this.iMobileRemoteService.findMonitoredMachineInfoByZj(zj,deviceId);
             respMsg.formatSuccMsg();
             respMsg.setData(dataMap);
-
-            return respMsg;
         }
+
+        this.logger.info("接口getMonitoredMachineInfo响应结果:{}" , JsonUtil.bean2Json(respMsg));
+        return respMsg;
+
     }
 
     @RequestMapping(value = "sendTaskToMachine" , method = RequestMethod.POST , name = "发送命令给机器")
     @ResponseBody
     public ResponseMsg sendTaskToMachine(@RequestBody(required = false) Map<String , Object> param){
+
+        this.logger.info("接口sendTaskToMachine接收参数:{}" , JsonUtil.bean2Json(param));
+
         ResponseMsg respMsg = generateRespMsgAndCheckReqParam(param);
-        if ("1".equals(respMsg.getCode())){ //参数合法
-            return respMsg;
-        }else{
-            return respMsg;
+        if ( !"1".equals(respMsg.getCode()) ){ //参数合法
+
         }
+
+        this.logger.info("接口sendTaskToMachine响应结果:{}" , JsonUtil.bean2Json(respMsg));
+        return respMsg;
     }
 
     @RequestMapping(value = "sendStatusToMachine" , method = RequestMethod.POST , name = "修改电脑状态，用于调试")

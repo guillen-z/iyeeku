@@ -154,6 +154,7 @@
     //连接成功建立的回调方法
     websocket.onopen = function (ev) {
         //websocket.send("Listener");
+        console.info("连接建立成功。建立时间："+new Date());
     }
 
     //接收到消息的回调方法
@@ -164,7 +165,7 @@
 
     //连接关闭的回调方法
     websocket.onclose = function (ev) {
-        console.info("WebSocket链接关闭");
+        console.info("WebSocket链接关闭，关闭时间：" + new Date());
         //websocket.close();
     }
 

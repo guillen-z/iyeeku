@@ -92,6 +92,9 @@ public class CommonPermissionCtroller {
     @ResponseBody
     public void addUrlGrant(String jsbh , String sqzybm , String sqzylx , String cdurl , String cdbh){
 
+        String[] sqzybms = sqzybm.split(",");
+
+        this.commonPermissionService.addUrlGrant(jsbh,sqzybms,sqzylx,cdurl,cdbh);
 
         IyeekuUserInfo userInfo = ContextUtil.getLoginUser();
         this.pfAuditLogService.saveAuditLog("access_permissions" , "10" , userInfo.getUserId() , userInfo.getUserIP() ,

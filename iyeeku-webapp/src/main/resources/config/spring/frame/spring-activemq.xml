@@ -13,9 +13,9 @@
     <!-- 配置JSM连接工厂 -->
     <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="${broker.URL}" />
-        <property name="userName" value="${mq.username}"/>
         <property name="properties">
-            <bean class="com.iyeeku.core.security.C3P0DatasourcePropertiesFactory" factory-method="getProperties">
+            <bean class="com.iyeeku.core.security.ActiveMqConnectPropertiesFactory" factory-method="getProperties">
+                <constructor-arg type="java.lang.String" value="${mq.username}"/>
                 <constructor-arg type="java.lang.String" value="${mq.passwd}"/>
                 <constructor-arg type="java.lang.String" value="${run_mode}"/>
             </bean>
@@ -23,6 +23,7 @@
         <property name="useAsyncSend" value="true" />
         <property name="alwaysSessionAsync" value="true" />
         <property name="useDedicatedTaskRunner" value="true" />
+        <property name="maxThreadPoolSize" value="${jms.maxConnections}"/>
     </bean>
 
     <!-- 配置JSM模板(Queue),Spring提供的JMS工具类，它发送、接收消息 -->

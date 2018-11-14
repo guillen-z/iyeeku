@@ -16,6 +16,8 @@ public interface CommonPermissionDao {
 
     public abstract List<PFArcGrantVO> findSSmkGrantInfo(Map<String ,String> map);
 
+    public abstract List<PFArcGrantVO> findGrantBySqdxbh(PFArcGrantVO arcGrantVO);
+
     public abstract void updateMenuOrUrlRolePer(PFArcGrantVO arcGrantVO);
 
     public abstract void addCommonPer(PFArcGrantVO arcGrantVO);
@@ -23,6 +25,8 @@ public interface CommonPermissionDao {
     public abstract void delMenuPer(PFArcGrantVO arcGrantVO);
 
     public abstract void delCommonPer(PFArcGrantVO arcGrantVO);
+
+    public abstract void updateUrlGrantBySqdxbh(Map<String,String> map);
 
 
 }

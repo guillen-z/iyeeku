@@ -33,6 +33,8 @@ public interface CommonPermissionService {
 
     public abstract void delCommonPer(PFArcGrantVO arcGrantVO);
 
+    public abstract void addUrlGrant(String jsbh , String[] sqzybms , String sqzylx ,String cdurl ,String cdbh);
+
 
 
 }

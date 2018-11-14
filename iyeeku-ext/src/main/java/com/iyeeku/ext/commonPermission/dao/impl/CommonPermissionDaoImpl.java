@@ -33,6 +33,11 @@ public class CommonPermissionDaoImpl extends BaseDaoImpl implements CommonPermis
     }
 
     @Override
+    public List<PFArcGrantVO> findGrantBySqdxbh(PFArcGrantVO arcGrantVO) {
+        return this.queryAll_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.findGrantBySqdxbh",arcGrantVO);
+    }
+
+    @Override
     public void updateMenuOrUrlRolePer(PFArcGrantVO arcGrantVO) {
         this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateMenuOrUrlRolePer" , arcGrantVO);
     }
@@ -52,4 +57,8 @@ public class CommonPermissionDaoImpl extends BaseDaoImpl implements CommonPermis
         this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateMenuPer" , arcGrantVO);
     }
 
+    @Override
+    public void updateUrlGrantBySqdxbh(Map<String, String> map) {
+        this.update_myBatis("com.iyeeku.ext.grant.dao.PFArcGrantDao.updateUrlGrantBySqdxbh",map);
+    }
 }

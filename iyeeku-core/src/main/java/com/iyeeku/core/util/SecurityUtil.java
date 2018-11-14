@@ -53,17 +53,17 @@ public class SecurityUtil {
     }
 
     public static void main(String[] args) throws Exception {
-/*        String message = "123456";
-        String key = "123456";
+        String message = "jdbc:oracle:thin:@localhost:1521:ORCL";
+        String key = "14F60F42A9FE65763B22CDD0D6B2D60E";
         String encryptMsg = encrypt(message, key);
         System.out.println("encrypted message is below :");
-        System.out.println(encryptMsg);*/
+        System.out.println(encryptMsg);
 
-/*      String decryptedMsg = decrypt(encryptMsg, key);
+        String decryptedMsg = decrypt(encryptMsg, key);
         System.out.println("decrypted message is below :");
         System.out.println(decryptedMsg);
 
-        System.out.println(encrypt("123456" , ""));*/
+        System.out.println(encrypt("123456" , ""));
 
     }
 
