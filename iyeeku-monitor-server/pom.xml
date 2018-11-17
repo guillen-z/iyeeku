@@ -15,9 +15,35 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <spring.version>4.3.10.RELEASE</spring.version>
     </properties>
 
+    <build>
+        <!-- 注意这个地方的BUG
+         MAVEN和mybatis整合时打包漏掉mapper的xml文件及其他资源
+         最常见错误：Mybatis启动老是报绑定错误（找不到Mapper对应的 SQL配置）
+         -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
     <dependencies>
+
+        <!-- spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
 
         <!-- c3p0数据库连接池jar包 -->
         <dependency>
