@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iyeeku.watch.mapper.MachineInfoMapper">
+
+    <resultMap id="baseResultMap1" type="java.util.HashMap">
+        <result property="zj" column="ZJ"/>
+        <result property="jqbh" column="JQBH"/>
+        <result property="dnmc" column="DNMC"/>
+        <result property="czxt" column="CZXT"/>
+        <result property="jbpz" column="JBPZ"/>
+        <result property="sbbh" column="SBBH"/>
+        <result property="zt" column="ZT"/>
+        <result property="sfyxjk" column="SFYXJK"/>
+        <result property="attr1" column="ATTR1"/>
+        <result property="attr2" column="ATTR2"/>
+        <result property="attr3" column="ATTR3"/>
+        <result property="attr4" column="ATTR4"/>
+        <result property="attr5" column="ATTR5"/>
+        <result property="attr6" column="ATTR6"/>
+        <result property="attr7" column="ATTR7"/>
+    </resultMap>
+
+    <select id="findMachineInfos" parameterType="com.iyeeku.watch.vo.MachineInfoVO" resultMap="baseResultMap1">
+        select a.zj,a.jqbh,a.dnmc,a.czxt,a.jbpz,b.sbbh,a.zt,b.sfyxjk,b.attr1,b.attr2,b.attr3,b.attr4,b.attr5,b.attr6,b.attr7
+        from IYEEKU_MACHINE_INFO a
+        left join IYEEKU_MACHINE_ACCESS_MONITOR b on a.zj = b.sqjqbh
+        WHERE 1=1
+        <if test="jqbh != null and jqbh != ''"> AND a.jqbh = #{jqbh}</if>
+        <if test="dnmc != null and dnmc != ''"> AND a.dnmc LIKE '%'||#{dnmc}||'%'</if>
+        <if test="zt != null and zt != ''"> AND a.zt = #{zt}</if>
+        <if test="czxt != null and czxt != ''"> AND a.czxt = #{czxt}</if>
+    </select>
+
+    <select id="findMachineInfosCount" parameterType="com.iyeeku.watch.vo.MachineInfoVO" resultType="int">
+        select COUNT(1) from IYEEKU_MACHINE_INFO a
+        left join IYEEKU_MACHINE_ACCESS_MONITOR b on a.zj = b.sqjqbh
+        WHERE 1=1
+        <if test="jqbh != null and jqbh != ''"> AND a.jqbh = #{jqbh}</if>
+        <if test="dnmc != null and dnmc != ''"> AND a.dnmc LIKE '%'||#{dnmc}||'%'</if>
+        <if test="zt != null and zt != ''"> AND a.zt = #{zt}</if>
+        <if test="czxt != null and czxt != ''"> AND a.czxt = #{czxt}</if>
+    </select>
+
+    
+</mapper>

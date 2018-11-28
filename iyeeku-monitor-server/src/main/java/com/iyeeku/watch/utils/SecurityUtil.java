@@ -14,7 +14,6 @@ public class SecurityUtil {
 
     public static String CIPHER_ALGORITHM = "AES"; // optional value AES/DES/DESede
 
-
     public static Key getKey(String strKey) {
         try {
             if (strKey == null) {
@@ -31,8 +30,8 @@ public class SecurityUtil {
     }
 
     public static String encrypt(String data, String key) throws Exception {
-        SecureRandom sr = new SecureRandom();
         Key secureKey = getKey(key);
+        SecureRandom sr = new SecureRandom();
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, secureKey, sr);
         byte[] bt = cipher.doFinal(data.getBytes());
@@ -41,25 +40,13 @@ public class SecurityUtil {
     }
 
     public static String decrypt(String message, String key) throws Exception {
-        SecureRandom sr = new SecureRandom();
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+        SecureRandom sr = new SecureRandom();
         Key secureKey = getKey(key);
         cipher.init(Cipher.DECRYPT_MODE, secureKey, sr);
         byte[] res = new BASE64Decoder().decodeBuffer(message);
         res = cipher.doFinal(res);
         return new String(res);
     }
-
-    public static void main(String[] args) throws Exception {
-        String message = "123456";
-        String key = "123456";
-        String encryptMsg = encrypt(message, key);
-        System.out.println("encrypted message is below :");
-        System.out.println(encryptMsg);
-        String decryptedMsg = decrypt(encryptMsg, key);
-        System.out.println("decrypted message is below :");
-        System.out.println(decryptedMsg);
-        System.out.println(encrypt("123456" , ""));
-    }
-
+    
 }
