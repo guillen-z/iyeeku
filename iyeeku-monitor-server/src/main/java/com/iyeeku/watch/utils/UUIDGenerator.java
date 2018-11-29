@@ -21,30 +21,21 @@ public class UUIDGenerator {
     }
 
     public static String generate(Object obj){
-        StringBuilder uid = new StringBuilder(32);
-
         long currentTimeMillis = System.currentTimeMillis();
+        StringBuilder uid = new StringBuilder(32);
         uid.append(toHex((int)(currentTimeMillis & 0xFFFFFFFF), 8));
-
         uid.append(MID_VALUE_STATIC);
-
         uid.append(toHex(System.identityHashCode(obj), 8));
-
         uid.append(toHex(getRandom(), 8));
-
         return uid.toString();
     }
 
     public String generate(){
-        StringBuilder uid = new StringBuilder(32);
-
         long currentTimeMillis = System.currentTimeMillis();
+        StringBuilder uid = new StringBuilder(32);
         uid.append(toHex((int)(currentTimeMillis & 0xFFFFFFFF), 8));
-
         uid.append(this.midValue);
-
         uid.append(toHex(this.seeder.nextInt(), 8));
-
         return uid.toString();
     }
 

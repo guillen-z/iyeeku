@@ -15,6 +15,7 @@
         <module>iyeeku-monitor</module>
         <module>iyeeku-monitor-server</module>
         <module>iyeeku-develop</module>
+        <module>iyeeku-pec-trans</module>
     </modules>
 
     <properties>

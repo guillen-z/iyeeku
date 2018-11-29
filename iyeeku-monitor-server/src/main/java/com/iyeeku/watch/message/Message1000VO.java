@@ -54,6 +54,7 @@ public class Message1000VO implements Serializable {
 
     public static class Exp_Message1000 implements Serializable{
         private static final long serialVersionUID = 1L;
+
     }
 
 }

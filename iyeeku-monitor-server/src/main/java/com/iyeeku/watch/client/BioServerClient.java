@@ -45,45 +45,42 @@ public class BioServerClient {
         public void run() {
             long startTime = System.currentTimeMillis();
             sendHeartBeat(); //发送心跳检测
-            while (true){
-                try {
-                    if (socket == null || socket.isClosed()) {
-                        socket = new Socket(hostname, port); //连接远程socket
-                        out = socket.getOutputStream();
-                    }
-                    Thread.sleep(100);
-                    in = socket.getInputStream();
-                    int size = in.available();
-                    if (size <= 0){
-                        //这里约定，如果30秒没有收到服务器发回来的信息，说明socket连接可能已经被远程服务器关闭
-                        if ((System.currentTimeMillis() - startTime) > 3 * 10 * 1000){
-                            socket.close(); // 这里可以关闭socket链接了
-                            startTime = System.currentTimeMillis();
-                        }
-                        continue;
-                    }else {
+            while (true) try {
+                if (socket == null || socket.isClosed()) {
+                    socket = new Socket(hostname, port); //连接远程socket
+                    out = socket.getOutputStream();
+                }
+                Thread.sleep(100);
+                in = socket.getInputStream();
+                int size = in.available();
+                if (size <= 0) {
+                    //这里约定，如果30秒没有收到服务器发回来的信息，说明socket连接可能已经被远程服务器关闭
+                    if ((System.currentTimeMillis() - startTime) > 3 * 10 * 1000) {
+                        socket.close(); // 这里可以关闭socket链接了
                         startTime = System.currentTimeMillis();
                     }
-                    ObjectInputStream objectInputStream = new ObjectInputStream(in);
-                    Serializable response = (Serializable) objectInputStream.readObject();
-                    if (response instanceof Message1000VO.Resp_Message1000){
+                    continue;
+                } else {
+                    startTime = System.currentTimeMillis();
+                }
+                ObjectInputStream objectInputStream = new ObjectInputStream(in);
+                Serializable response = (Serializable) objectInputStream.readObject();
+                if (response instanceof Message1000VO.Resp_Message1000) {
 
-                    }
-
-                    if (response instanceof Message1000VO.Exp_Message1000){
-
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                    try {
-                        socket.close();
-
-                    }catch (IOException e1){
-                        e1.printStackTrace();
-                    }
                 }
 
+                if (response instanceof Message1000VO.Exp_Message1000) {
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                try {
+                    socket.close();
+
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
 
         }
@@ -99,7 +96,7 @@ public class BioServerClient {
 
             //Message1000VO message = new Message1000VO();
             Req_Message1000 req_message1000 = new Req_Message1000();
-            req_message1000.setCode("1000");
+            req_message1000.setCode("汉字测试");
             //message.setReq_message1000(req_message1000);
 
             OutputStream out = socket.getOutputStream();
@@ -109,7 +106,7 @@ public class BioServerClient {
             objectOutputStream.flush();
             objectOutputStream.close();
 
-            InputStream in = socket.getInputStream();
+/*            InputStream in = socket.getInputStream();
             ObjectInputStream objectInputStream = new ObjectInputStream(in);
 
             Serializable response = (Serializable) objectInputStream.readObject();
@@ -121,7 +118,7 @@ public class BioServerClient {
             if (response instanceof Message1000VO.Exp_Message1000){
 
 
-            }
+            }*/
 
         }catch (Exception e){
             e.printStackTrace();

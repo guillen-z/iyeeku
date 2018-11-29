@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inbounds>
+    <!-- 1000接口定义 -->
+    <inbound code="1000" class="com.iyeeku.watch.inbound.Handler1000"/>
+    <!-- 1001接口配置 -->
+    <inbound code="1001" class="com.iyeeku.watch.inbound.Handler1001"/>
+
+
+</inbounds>

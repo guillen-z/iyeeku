@@ -1,9 +1,7 @@
 package com.iyeeku.watch.server;
 
-import com.iyeeku.watch.service.MachineInfoService;
 import com.iyeeku.watch.task.IWatchBioTask;
 import com.iyeeku.watch.task.impl.IWatchBioTaskImpl;
-import com.iyeeku.watch.utils.ContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +15,8 @@ import java.util.concurrent.TimeUnit;
 
 public class IyeekuWatchBIOServer {
 
-    public static Logger logger = LoggerFactory.getLogger(IyeekuWatchBIOServer.class);
+    public static Logger LOGGER = LoggerFactory.getLogger(IyeekuWatchBIOServer.class);
     private volatile boolean running = false;
-
-    private MachineInfoService machineInfoService = (MachineInfoService)ContextUtil.getBean(MachineInfoService.BEANID);
 
     public void start(){
 
@@ -43,31 +39,32 @@ public class IyeekuWatchBIOServer {
 
         try {
             server = new ServerSocket(port);
-            running = true;
-            logger.info("服务器启动成功并开始监听" + port + "端口...");
         }catch (IOException e){
-            logger.error("端口" + port + "被占用...");
+            LOGGER.error("端口" + port + "被占用...");
             e.printStackTrace();
+            return;
         }
+
+        running = true;
+        LOGGER.info("服务器启动成功并开始监听" + port + "端口...");
 
         Socket socket;
 
         while (running){
             try {
                 socket = server.accept();
-                socket.setSoTimeout(1000*iTimeOutSeconds);
-                IWatchBioTask task = new IWatchBioTaskImpl(socket,machineInfoService);
+                socket.setSoTimeout(1000 * iTimeOutSeconds);
+                IWatchBioTask task = new IWatchBioTaskImpl(socket);
                 executor.execute(task);
             }catch (Exception ex){
                 ex.printStackTrace();
-                logger.error("出现异常，整个服务器停止!" , ex.getMessage());
+                LOGGER.error("出现异常，整个服务器停止!" , ex.getMessage());
                 try {
                     server.close();
                 }catch (Exception e){
-                    logger.error("服务关闭出现异常!" , e.getMessage());
+                    LOGGER.error("服务关闭出现异常!" , e.getMessage());
                 }
                 running = false;
-                break;
             }
         }
 

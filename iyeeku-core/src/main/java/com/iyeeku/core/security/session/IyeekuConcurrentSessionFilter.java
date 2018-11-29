@@ -76,6 +76,7 @@ public class IyeekuConcurrentSessionFilter extends GenericFilterBean {
                     return;
                 }
 
+                //刷新当前session
                 this.sessionRegistry.refreshLastRequest(info.getSessionId());
             }
 

@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/iyeeku-ext/iyeeku-ext.iml" filepath="$PROJECT_DIR$/iyeeku-ext/iyeeku-ext.iml" />
       <module fileurl="file://$PROJECT_DIR$/iyeeku-monitor/iyeeku-monitor.iml" filepath="$PROJECT_DIR$/iyeeku-monitor/iyeeku-monitor.iml" />
       <module fileurl="file://$PROJECT_DIR$/iyeeku-monitor-server/iyeeku-monitor-server.iml" filepath="$PROJECT_DIR$/iyeeku-monitor-server/iyeeku-monitor-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iyeeku-pec-trans/iyeeku-pec-trans.iml" filepath="$PROJECT_DIR$/iyeeku-pec-trans/iyeeku-pec-trans.iml" />
       <module fileurl="file://$PROJECT_DIR$/iyeeku-webapp/iyeeku-webapp.iml" filepath="$PROJECT_DIR$/iyeeku-webapp/iyeeku-webapp.iml" />
     </modules>
   </component>

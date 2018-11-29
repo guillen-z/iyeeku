@@ -13,6 +13,7 @@
 	<context:component-scan base-package="com.iyeeku.core.cache"/>
 	<context:component-scan base-package="com.iyeeku.monitor.util"/>
 
+	<!-- 工具类扫描，注意这里静态属性的注入，方法上不能带有static关键字 -->
 	<bean class="com.iyeeku.core.context.ContextUtil"/>
 
 	<!-- 有了上面的配置，下面这个配置可以省略掉的，因为上面的配置会默认打开以下配置。

@@ -11,6 +11,7 @@
         <module name="iyeeku-ext" />
         <module name="iyeeku-monitor" />
         <module name="iyeeku-monitor-server" />
+        <module name="iyeeku-pec-trans" />
         <module name="iyeeku-webapp" />
       </profile>
     </annotationProcessing>
@@ -23,6 +24,7 @@
       <module name="iyeeku-ext" target="1.8" />
       <module name="iyeeku-monitor" target="1.8" />
       <module name="iyeeku-monitor-server" target="1.8" />
+      <module name="iyeeku-pec-trans" target="1.8" />
       <module name="iyeeku-test" target="1.8" />
       <module name="iyeeku-user" target="1.8" />
       <module name="iyeeku-webapp" target="1.8" />

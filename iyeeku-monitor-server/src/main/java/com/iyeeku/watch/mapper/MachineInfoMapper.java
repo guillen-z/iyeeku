@@ -13,5 +13,4 @@ public interface MachineInfoMapper {
 
     public abstract int findMachineInfosCount(MachineInfoVO vo);
 
-
 }

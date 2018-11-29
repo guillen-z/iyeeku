@@ -71,6 +71,13 @@
             <version>11.2.0.1.0</version>
         </dependency>
 
+        <!-- xml文件解析包 -->
+        <dependency>
+            <groupId>org.dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
     </dependencies>
 
 

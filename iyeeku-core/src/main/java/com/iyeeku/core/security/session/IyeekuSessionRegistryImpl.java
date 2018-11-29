@@ -47,6 +47,7 @@ public class IyeekuSessionRegistryImpl implements SessionRegistry , ApplicationL
 
     @Override
     public SessionInformation getSessionInformation(String sessionId) {
+        // TODO 到时候可以更新方案，session的持久化可以通过分布式缓存实现，而非存储在数据库中...
         Assert.hasText(sessionId , "sessionId required as per interface contract");
         SessionInformation sessionInfo = this.sessionService.updAndGetSessionInformation(sessionId);
         return sessionInfo;
