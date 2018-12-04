@@ -34,25 +34,36 @@ public class Message1000VO implements Serializable {
         this.exp_message1000 = exp_message1000;
     }
 
-    public static class Req_Message1000 implements Serializable{
+    public static class Req_Message1000 extends IyeekuRequestMessgae{
         private static final long serialVersionUID = 1L;
 
-        private String code;
+        private String name;
 
-        public String getCode() {
-            return code;
+        public String getName() {
+            return name;
         }
 
-        public void setCode(String code) {
-            this.code = code;
+        public void setName(String name) {
+            this.name = name;
+        }
+
+    }
+
+    public static class Resp_Message1000 extends IyeekuResponseMessage{
+        private static final long serialVersionUID = 1L;
+
+        private int count;
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int count) {
+            this.count = count;
         }
     }
 
-    public static class Resp_Message1000 implements Serializable{
-        private static final long serialVersionUID = 1L;
-    }
-
-    public static class Exp_Message1000 implements Serializable{
+    public static class Exp_Message1000 extends IyeekuExceptionMessage{
         private static final long serialVersionUID = 1L;
 
     }

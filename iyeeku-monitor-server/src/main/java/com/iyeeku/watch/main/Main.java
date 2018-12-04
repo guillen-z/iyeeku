@@ -3,6 +3,7 @@ package com.iyeeku.watch.main;
 import com.iyeeku.watch.server.IyeekuWatchBIOServer;
 import com.iyeeku.watch.utils.ContextUtil;
 import com.iyeeku.watch.utils.LogbackInit;
+import com.iyeeku.watch.utils.TransConfigParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -27,6 +28,10 @@ public class Main {
         logger.info("spring容器启动成功...");
         //设置全局的applicationContext对象
         ContextUtil.setApplicationContext(applicationContext);
+        //解析inbound.xml文件
+        String transConf = Main.class.getClassLoader().getResource("config/service/inbound.xml").getPath();
+        TransConfigParser.intiConf(transConf);
+
         try {
             //启动服务器
             logger.info("开始启动服务...");

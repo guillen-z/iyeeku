@@ -38,19 +38,22 @@ public class MessageVO implements Serializable {
     }
 
     /**   =========请求消息，响应消息，异常消息定义========   **/
+    public static class Req_Message extends IyeekuRequestMessgae {
 
-    public static class Req_Message implements Serializable {
         private static final long serialVersionUID = 1L;
+
     }
 
-    public static class Resp_Message implements Serializable {
+    public static class Resp_Message extends IyeekuResponseMessage {
+
         private static final long serialVersionUID = 1L;
 
         //这里注意，集合返回使用类数组,eg：  Student[]
 
     }
 
-    public static class Exp_Message implements Serializable {
+    public static class Exp_Message extends IyeekuExceptionMessage {
+
         private static final long serialVersionUID = 1L;
         private String errCode; //错误代号
         private String errMsg;  //错误信息

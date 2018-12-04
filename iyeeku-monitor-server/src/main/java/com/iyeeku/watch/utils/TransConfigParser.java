@@ -5,6 +5,8 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,6 +17,37 @@ import java.io.InputStream;
 import java.util.List;
 
 public class TransConfigParser {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(TransConfigParser.class);
+
+    public static void intiConf(String fileName){
+
+        SAXReader reader = new SAXReader();
+
+        try {
+            Document document = reader.read(new File(fileName));
+            Element rootElement = document.getRootElement();
+
+            List<Element> elements = rootElement.elements();
+
+            elements.forEach(element -> {
+                String code = element.attributeValue("code");
+                String targetClass = element.attributeValue("class");
+
+                if (code != null && !"".equals(code) && targetClass != null && !"".equals(targetClass)){
+                    TransConfig.inboundMap.put(code , targetClass);
+                }else {
+                    LOGGER.error("解析inbound.xml文件出现错误，存在code，class为空的情况，请检查文件!!");
+                    return;
+                }
+            });
+
+        }catch (DocumentException e){
+            e.printStackTrace();
+        }
+
+    }
+
 
     public static void main(String[] args) {
 

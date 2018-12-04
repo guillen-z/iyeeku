@@ -43,7 +43,7 @@
     <logger name="com.mchange.v2.c3p0" level="ERROR"/>
     <logger name="com.mchange.v2.resourcepool" level="ERROR"/>
 
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
 <!--        <appender-ref ref="DAYFILE"/>
         <appender-ref ref="FILE"/>-->

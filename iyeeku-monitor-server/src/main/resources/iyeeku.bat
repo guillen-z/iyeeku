@@ -2,16 +2,23 @@
 
 set RUN_CLASS="com.iyeeku.watch.main.Main"
 
-rem set JAVA_OPTION="-Dkey=597E4335A9FE657664A294A6B7D332E6 -Djava.encoding=UTF-8 -Xms100M -Xmx100M -server"
+set JAVA_OPTION=-Dkey=597E4335A9FE657664A294A6B7D332E6
+set JAVA_OPTION=%JAVA_OPTION% -Dukey=11337612A9FE65763B22CDD09441FA04
+set JAVA_OPTION=%JAVA_OPTION% -Dikey=14F60F42A9FE65763B22CDD0D6B2D60E
+set JAVA_OPTION=%JAVA_OPTION% -Djava.encoding=UTF-8 -Xms100M -Xmx100M
 
-set JAVA_OPTION="-Dkey=597E4335A9FE657664A294A6B7D332E6"
+set CLASSPATH=.
 
-set CLASSPATH=".;./lib/c3p0-0.9.5.2.jar;./lib/mchange-commons-java-0.2.11.jar;./lib/mysql-connector-java-6.0.6.jar;./lib/ojdbc6-11.2.0.1.0.jar"
+setlocal enabledelayedexpansion
 
-echo Begin Start Iyeeku-Watch-Server
+for /f %%i in (jar.config) do (
+	set CLASSPATH=!CLASSPATH!;./lib/%%i
+)
+
+echo %CLASSPATH%
+
+echo Begin Start Iyeeku-Monitor-Server
 
 java -cp %CLASSPATH% %JAVA_OPTION% %RUN_CLASS%
 
 pause
-
-

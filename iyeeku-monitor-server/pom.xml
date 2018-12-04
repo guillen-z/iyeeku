@@ -19,7 +19,9 @@
     </properties>
 
     <build>
-        <!-- 注意这个地方的BUG
+        <!--
+         解决Maven 打包时丢失properties，xml文件
+         注意这个地方的BUG
          MAVEN和mybatis整合时打包漏掉mapper的xml文件及其他资源
          最常见错误：Mybatis启动老是报绑定错误（找不到Mapper对应的 SQL配置）
          -->
@@ -30,13 +32,57 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
-                <filtering>false</filtering>
+                <!--<filtering>false</filtering>-->
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
+
+        <!--
+            maven如何将项目引用的所有jar包复制到lib文件夹内
+         -->
+<!--        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>theMainClass</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>-->
+
     </build>
 
-    <dependencies>
 
+
+
+    <dependencies>
         <!-- spring-core -->
         <dependency>
             <groupId>org.springframework</groupId>

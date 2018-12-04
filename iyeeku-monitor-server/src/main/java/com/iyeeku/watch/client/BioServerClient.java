@@ -96,7 +96,7 @@ public class BioServerClient {
 
             //Message1000VO message = new Message1000VO();
             Req_Message1000 req_message1000 = new Req_Message1000();
-            req_message1000.setCode("汉字测试");
+            req_message1000.setCode("中文汉字测试");
             //message.setReq_message1000(req_message1000);
 
             OutputStream out = socket.getOutputStream();

@@ -14,9 +14,8 @@ public class Handler1001 implements IyeekuHandlerProcess {
     @Override
     public Serializable doExecute(Serializable request) {
         LOGGER.info("Handler1001 doExecute");
-
+        
         return null;
     }
-
 
 }
