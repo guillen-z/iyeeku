@@ -10,10 +10,17 @@
 
 	<!--  使用c3p0数据源连接oracle数据库  -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="properties">
+			<bean class="com.iyeeku.watch.utils.C3P0DatasourcePropertiesFactory" factory-method="getProperties">
+				<constructor-arg type="java.lang.String" value="${user}"/>
+				<constructor-arg type="java.lang.String" value="${password}"/>
+				<constructor-arg type="java.lang.String" value="${run_mode}"/>
+			</bean>
+		</property>
 		<property name="driverClass" value="${driverClass}"/>
 		<property name="jdbcUrl" value="${jdbcUrl}"/>
-		<property name="user" value="${user}"/>
-		<property name="password" value="${password}"/>
+<!--		<property name="user" value="${user}"/>
+		<property name="password" value="${password}"/>-->
 		<property name="initialPoolSize" value="10"></property>
 		<property name="minPoolSize" value="10"></property>
 		<property name="maxPoolSize" value="30"></property>
