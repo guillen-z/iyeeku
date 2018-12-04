@@ -83,11 +83,12 @@
 
 
     <dependencies>
-        <dependency>
+
+<!--        <dependency>
             <groupId>iyeeku</groupId>
             <artifactId>iyeeku-pec-trans</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
 
         <!-- spring-core -->
         <dependency>

@@ -20,7 +20,8 @@ public class IyeekuCall {
 
         try {
             //1.建立连接
-            socket = new Socket("localhost" , 6060);
+            //socket = new Socket("localhost" , 6060);
+            socket = new Socket("www.iyeeku.com" , 6060);
 
             out = socket.getOutputStream();
             objectOutputStream = new ObjectOutputStream(out);
