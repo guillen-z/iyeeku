@@ -14,6 +14,12 @@ public class C3P0DatasourcePropertiesFactory {
 
     public static Properties getProperties(String user , String pwd , String production) throws Exception{
 
+
+        System.out.println("\n========  C3P0DatasourcePropertiesFactory getProperties  ==========\n");
+        System.out.println("user ==>> " + user);
+        System.out.println("pwd ==>> " + pwd);
+        System.out.println("");
+
         Properties p = new Properties();
 
         if(PRODUCTION_MODE.equals(production)){

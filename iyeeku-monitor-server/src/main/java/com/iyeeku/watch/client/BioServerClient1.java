@@ -21,8 +21,6 @@ public class BioServerClient1 {
             System.out.println(resp.getRespCode());
             System.out.println(resp.getRespMsg());
 
-
-
         }
 
         if (response instanceof Message1000VO.Exp_Message1000){
