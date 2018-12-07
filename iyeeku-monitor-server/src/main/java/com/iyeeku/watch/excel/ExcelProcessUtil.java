@@ -43,7 +43,8 @@ public class ExcelProcessUtil {
      * @param bold          字体是否粗体
      * @param italic        字体是否斜体
      * @param underline     字体是否加下滑线
-     * @param fillForegroundColor       单元格填充色
+     * @param fontColor     字体颜色
+     * @param fillForegroundColor   单元格填充色
      * @return
      */
     public static XSSFCellStyle getCellStyle(XSSFWorkbook wb , HorizontalAlignment alignment , boolean bold , boolean italic ,
@@ -180,19 +181,19 @@ public class ExcelProcessUtil {
             XSSFHyperlink hyperlink = (XSSFHyperlink) creationHelper.createHyperlink(HyperlinkType.URL);
             hyperlink.setAddress("#目录!A1");
 
-            XSSFCellStyle linkStyle = getCellStyle(wb , HorizontalAlignment.CENTER , true , false , false ,IndexedColors.MAROON.index ,53);
+            XSSFCellStyle linkStyle = getCellStyle(wb , HorizontalAlignment.CENTER , true , false , false ,IndexedColors.WHITE.index ,53);
             linkStyle.setBorderBottom(BorderStyle.NONE);//去掉边框
-            //linkStyle.setBorderLeft(BorderStyle.THIN);
+            //linkStyle.setBorderLeft(BorderStyle.NONE);
             linkStyle.setBorderRight(BorderStyle.NONE);
             linkStyle.setBorderTop(BorderStyle.NONE);
+            linkStyle.getFont().setFontHeightInPoints((short) 12);
+
             XSSFCell returnCell = headRow.createCell(9);
             returnCell.setCellStyle(linkStyle);
             returnCell.setCellValue("返回");
             returnCell.setHyperlink(hyperlink);
             CellRangeAddress ReturnRegion = new CellRangeAddress(0,1,9,9);
             sheet.addMergedRegion(ReturnRegion);
-
-
 
             XSSFRow titleRow = sheet.createRow(rowIndex++);//创建标题行
             XSSFCellStyle titleStyle = getCellStyle(wb , HorizontalAlignment.LEFT , true , false , false , -1 ,70);

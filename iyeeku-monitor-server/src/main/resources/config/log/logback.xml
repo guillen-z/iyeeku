@@ -43,6 +43,11 @@
     <logger name="com.mchange.v2.c3p0" level="ERROR"/>
     <logger name="com.mchange.v2.resourcepool" level="ERROR"/>
 
+    <logger name="com.iyeeku.watch" level="INFO">
+        <appender-ref ref="DAYFILE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
 <!--        <appender-ref ref="DAYFILE"/>

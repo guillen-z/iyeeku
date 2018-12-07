@@ -12,7 +12,11 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="properties">
 			<bean class="com.iyeeku.watch.utils.C3P0DatasourcePropertiesFactory" factory-method="getProperties">
-				<constructor-arg type="java.lang.String" value="${user}"/>
+				<!-- TODO  这里的  ${user}  有点奇怪，在window系统中正常获取配置文件中的user=xxx 属性，
+				  	然而在 linux 服务器上运行时,其他的数据库链接配置都能正确获取 , 但是这里的${user} 取的是当前的 Linux 系统用户
+				 	换一个标识，列如 userName 就可以正常获取了。奇怪
+				  -->
+				<constructor-arg type="java.lang.String" value="${userName}"/>
 				<constructor-arg type="java.lang.String" value="${password}"/>
 				<constructor-arg type="java.lang.String" value="${run_mode}"/>
 			</bean>
