@@ -11,30 +11,30 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
-    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 
         if (!isExistEncryptKey()){
-            logger.info("密钥不存在...");
+            LOGGER.info("密钥不存在...");
             return;
         }
         //加载logback日志系统  ** 注意这里idea启动参数中 Working directory的设置 %MODULE_DIR%
         String logConf =  Main.class.getClassLoader().getResource("config/log/logback.xml").getPath();
         //LogbackInit.initLogback(System.getProperty("user.dir")+"/config/log/logback.xml");
         LogbackInit.initLogback(logConf);
-        logger.info("启动spring容器...");
+        LOGGER.info("启动spring容器...");
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:config/spring/applicationContext.xml");
-        logger.info("spring容器启动成功...");
+        LOGGER.info("spring容器启动成功...");
         //设置全局的applicationContext对象
         ContextUtil.setApplicationContext(applicationContext);
         //解析inbound.xml文件
         String transConf = Main.class.getClassLoader().getResource("config/service/inbound.xml").getPath();
         TransConfigParser.intiConf(transConf);
-
+        
         try {
             //启动服务器
-            logger.info("开始启动服务...");
+            LOGGER.info("开始启动服务...");
             new IyeekuWatchBIOServer().start();
 
         }catch (Exception ex){

@@ -425,6 +425,13 @@
             <version>5.9.0</version>
         </dependency>-->
 
+        <!-- alibaba dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+
         <!-- activemq -->
         <dependency>
             <groupId>org.apache.activemq</groupId>
