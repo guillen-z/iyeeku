@@ -13,10 +13,11 @@
 		<property name="properties">
 			<bean class="com.iyeeku.watch.utils.C3P0DatasourcePropertiesFactory" factory-method="getProperties">
 				<!-- TODO  这里的  ${user}  有点奇怪，在window系统中正常获取配置文件中的user=xxx 属性，
-				  	然而在 linux 服务器上运行时,其他的数据库链接配置都能正确获取 , 但是这里的${user} 取的是当前的 Linux 系统用户
-				 	换一个标识，列如 userName 就可以正常获取了。奇怪
-				  -->
-				<constructor-arg type="java.lang.String" value="${userName}"/>
+      				然而在 linux 服务器上运行时,其他的数据库链接配置都能正确获取 , 但是这里的${user} 取的是当前的 Linux 系统用户
+     				换一个标识，列如 userName 就可以正常获取了。奇怪
+     				20181210 奇怪，之前换成userName 在windo系统上运行正常，为啥今天怎么取的系统用户 yq180 呢???，换了一个别名 LocalUserName 又正常了
+  				-->
+				<constructor-arg type="java.lang.String" value="${LocalUserName}"/>
 				<constructor-arg type="java.lang.String" value="${password}"/>
 				<constructor-arg type="java.lang.String" value="${run_mode}"/>
 			</bean>
@@ -67,5 +68,7 @@
 	<!-- 扫描service服务类包 -->
 	<context:component-scan base-package="com.iyeeku.watch.service.impl"/>
 	<context:component-scan base-package="com.iyeeku.watch.inbound"/>
+
+	<import resource="spring-consumer.xml"/>
 
 </beans>

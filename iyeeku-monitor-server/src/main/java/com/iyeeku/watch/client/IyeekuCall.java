@@ -1,11 +1,15 @@
 package com.iyeeku.watch.client;
 
 import com.iyeeku.watch.message.IyeekuRequestMessgae;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.Socket;
 
 public class IyeekuCall {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(IyeekuCall.class);
 
     public static Serializable call(String code,Serializable request){
 
@@ -14,6 +18,11 @@ public class IyeekuCall {
         InputStream in = null;
         ObjectOutputStream objectOutputStream = null;
         ObjectInputStream objectInputStream = null;
+
+        if (code == null || "".equals(code)){
+            LOGGER.info("服务编码code不能为空");
+            return null;
+        }
 
         IyeekuRequestMessgae req_message = (IyeekuRequestMessgae) request;
         req_message.setCode(code);

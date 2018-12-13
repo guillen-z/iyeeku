@@ -14,14 +14,11 @@ public class ActiveMqConnectPropertiesFactory {
     private final static Logger logger = LoggerFactory.getLogger(ActiveMqConnectPropertiesFactory.class);
 
     public static Properties getProperties(String user , String pwd , String production) throws Exception{
-
         Properties p = new Properties();
-
         if(PRODUCTION_MODE.equals(production)){
-
             try{
-                String ukey = System.getProperty("ukey");
                 String key = System.getProperty("key");
+                String ukey = System.getProperty("ukey");
 
                 String dec_user = SecurityUtil.decrypt(user , ukey);
                 String dec_pwd = SecurityUtil.decrypt(pwd,key);

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iyeeku>
+
+    <!-- 数据库链接信息 -->
+    <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                    connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+                    userId="c##iyeekudev"
+                    password="iyeekudev">
+    </jdbcConnection>
+
+    <!-- 配置要输出的excel文件的文件名称跟输出路径 -->
+    <out-file>
+        <file-name>IYEEKU系统表结构设计.xlsx</file-name>
+        <file-path>E:\桌面文件</file-path>
+    </out-file>
+
+    <!-- 配置要导出的表信息 -->
+    <tables>
+        <table tableName="IYEEKU_MACHINE_INFO"/>
+        <table tableName="IYEEKU_MACHINE_ACCESS_MONITOR"/>
+        <table tableName="PF_ACCESS_MONITOR"/>
+        <table tableName="PF_ACCESS_MONITOR_SUM"/>
+        <table tableName="PF_ARCPWDHIST"/>
+        <table tableName="PF_ARCSECURITY_STRATEGY"/>
+        <table tableName="PF_ARCUSERAUTH"/>
+        <table tableName="PF_AUDITLOG"/>
+        <table tableName="PF_ONLINE"/>
+        <table tableName="PF_RESURL"/>
+        <table tableName="PF_SCHEDULE_TASK"/>
+        <table tableName="PF_SCHEDULETASK_MONITOR"/>
+        <table tableName="PF_ROLE_STAFF"/>
+        <table tableName="PF_ARCGRANT"/>
+        <table tableName="PF_CODETYPE"/>
+        <table tableName="PF_ROLE"/>
+        <table tableName="PF_CODEINFO"/>
+        <table tableName="PF_RESMENU"/>
+        <table tableName="PF_STAFF"/>
+        <table tableName="PF_RESRELATION"/>
+    </tables>
+
+</iyeeku>

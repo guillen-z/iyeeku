@@ -47,14 +47,6 @@ public class MIN {
 
     }
 
-    /**
-     * 归档
-     * @param entry
-     * @throws IOException
-     * @author yutao
-     * @return
-     * @date 2017年5月27日下午1:48:23
-     */
     private static String archive(String entry) throws IOException {
         File file = new File(entry);
 
@@ -70,15 +62,6 @@ public class MIN {
         return file.getAbsolutePath() + ".tar";
     }
 
-    /**
-     * 递归处理，准备好路径
-     * @param file
-     * @param tos
-     * @param basePath
-     * @throws IOException
-     * @author yutao
-     * @date 2017年5月27日下午1:48:40
-     */
     private static void archiveDir(File file, TarArchiveOutputStream tos, String basePath) throws IOException {
         File[] listFiles = file.listFiles();
         for(File fi : listFiles){
@@ -90,15 +73,6 @@ public class MIN {
         }
     }
 
-    /**
-     * 具体归档处理（文件）
-     * @param tos
-     * @param fi
-     * @param basePath
-     * @throws IOException
-     * @author yutao
-     * @date 2017年5月27日下午1:48:56
-     */
     private static void archiveHandle(TarArchiveOutputStream tos, File fi, String basePath) throws IOException {
         TarArchiveEntry tEntry = new TarArchiveEntry(basePath + File.separator + fi.getName());
         tEntry.setSize(fi.length());
@@ -116,16 +90,6 @@ public class MIN {
         tos.closeArchiveEntry();//这里必须写，否则会失败
     }
 
-
-
-    /**
-     * 把tar包压缩成gz
-     * @param path
-     * @throws IOException
-     * @author yutao
-     * @return
-     * @date 2017年5月27日下午2:08:37
-     */
     public static String compressArchive(String path) throws IOException{
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(path));
 

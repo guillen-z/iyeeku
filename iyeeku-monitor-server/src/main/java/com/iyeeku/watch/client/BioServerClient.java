@@ -17,7 +17,6 @@ public class BioServerClient {
     private OutputStream out;
     private ObjectOutputStream objOut = null;
 
-
     /**
      * 发送心跳包，30秒发送心跳包，保持链接有效
      */
@@ -25,8 +24,10 @@ public class BioServerClient {
         Req_Message1000 req_message1000 = new Req_Message1000();
         req_message1000.setCode("0110");
         new Thread(() -> {
+            int i = 1;
             while (true){
                 try {
+                    System.out.println("心跳测试，次数：" + (i++));
                     Thread.sleep(30*1000); //30秒发送一次心跳
                     objOut = new ObjectOutputStream(out);
                     objOut.writeObject(req_message1000);
@@ -104,7 +105,7 @@ public class BioServerClient {
 
             objectOutputStream.writeObject(req_message1000);
             objectOutputStream.flush();
-            objectOutputStream.close();
+            //objectOutputStream.close();
 
 /*            InputStream in = socket.getInputStream();
             ObjectInputStream objectInputStream = new ObjectInputStream(in);

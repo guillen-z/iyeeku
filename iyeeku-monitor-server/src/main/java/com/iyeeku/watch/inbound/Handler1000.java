@@ -1,5 +1,6 @@
 package com.iyeeku.watch.inbound;
 
+import com.iyeeku.ext.dubboRemote.IDubboRemoteService;
 import com.iyeeku.watch.message.Message1000VO;
 import com.iyeeku.watch.service.MachineInfoService;
 import com.iyeeku.watch.utils.SystemResponseCode;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.Serializable;
 
 @Component
@@ -17,6 +19,9 @@ public class Handler1000 implements IyeekuHandlerProcess {
 
     @Autowired
     private MachineInfoService machineInfoService;
+
+    @Resource(name = "demoService")
+    private IDubboRemoteService iDubboRemoteService;
 
     @Override
     public Serializable doExecute(Serializable request) {
@@ -28,8 +33,10 @@ public class Handler1000 implements IyeekuHandlerProcess {
         int count = 0;
         try {
             count = machineInfoService.findMachineInfosCount(null);
+            System.out.println("count ==>> " + count);
+            //int a = 1/
 
-            //int a = 1/0;
+            iDubboRemoteService.sayHello();
 
         }catch (Exception e){
             e.printStackTrace();

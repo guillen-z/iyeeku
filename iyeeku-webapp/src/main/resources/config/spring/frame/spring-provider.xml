@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="iyeekuProvider"/>
+
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry id="register" protocol="zookeeper" address="${dubbo.registry.address}"/>
+
+    <!-- 用dubbo协议在20880端口暴露服务  -->
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+
+    <!-- 具体的实现bean -->
+    <bean id="demoService" class="com.iyeeku.ext.dubboRemote.impl.DubboRemoteServiceImpl"/>
+    <bean id="demoService001" class="com.iyeeku.ext.dubboRemote.impl.DubboRemoteService001Impl"/>
+
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service registry="register" interface="com.iyeeku.ext.dubboRemote.IDubboRemoteService" ref="demoService"
+                   protocol="dubbo" timeout="2000" connections="10"/>
+    <dubbo:service registry="register" interface="com.iyeeku.ext.dubboRemote.IDubboRemoteService001" ref="demoService001"
+                   protocol="dubbo" timeout="2000" connections="10"/>
+
+
+
+</beans>

@@ -35,7 +35,7 @@ public class BioServerClient1 {
             }
 
             try {
-                Thread.sleep(200);
+                Thread.sleep(10000);
             }catch (Exception e){
                 e.printStackTrace();
             }

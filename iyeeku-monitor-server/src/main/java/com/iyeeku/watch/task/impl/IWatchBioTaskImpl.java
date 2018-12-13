@@ -39,12 +39,8 @@ public class IWatchBioTaskImpl implements IWatchBioTask {
             in = this.socket.getInputStream();
             objectInputStream = new ObjectInputStream(in);
 
-/*            out = socket.getOutputStream();
-            objectOutputStream = new ObjectOutputStream(out);
-            objectOutputStream.writeObject(response);
-            objectOutputStream.flush();*/
-
             out = socket.getOutputStream();
+            System.out.println(out);
             objectOutputStream = new ObjectOutputStream(out);
 
             try {
@@ -63,13 +59,12 @@ public class IWatchBioTaskImpl implements IWatchBioTask {
                         objectOutputStream.flush();
 
                     } else {
-
+                        //这里根据code分发到具体的handler中去处理
                         String transClass = TransConfig.inboundMap.get(code);
                         if (transClass != null && !"".equals(transClass)){
 
                             Class T = Class.forName(transClass);
                             IyeekuHandlerProcess handler = (IyeekuHandlerProcess) ContextUtil.getBean(T);
-                            //这里根据code分发到具体的handler中去处理
                             Serializable response =  handler.doExecute(request);
                             objectOutputStream.writeObject(response);
                             objectOutputStream.flush();
@@ -84,7 +79,6 @@ public class IWatchBioTaskImpl implements IWatchBioTask {
 
                         }
                     }
-
                 }else {
 
                     IyeekuResponseMessage response = new IyeekuResponseMessage();

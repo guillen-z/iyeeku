@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         id="WebApp_ID" version="3.0">
+         id="WebApp_ID" version="3.0" metadata-complete="true">
   <display-name>iyeeku</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -79,6 +79,10 @@
     <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
   </listener>
 
+  <context-param>
+    <param-name>contextInitializerClasses</param-name>
+    <param-value>org.apache.dubbo.config.spring.initializer.DubboApplicationContextInitializer</param-value>
+  </context-param>
 
   <listener>
     <listener-class>com.iyeeku.core.webapp.ContextInit</listener-class>
@@ -131,7 +135,6 @@
   </filter-mapping>
 
 
-
   <!-- 配置session超时时间，单位分钟 -->
   <listener>
     <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
@@ -140,9 +143,6 @@
   <session-config>
     <session-timeout>10</session-timeout>
   </session-config>
-
-
-
 
 
 </web-app>
